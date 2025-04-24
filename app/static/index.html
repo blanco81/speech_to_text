@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictado en Tiempo Real</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #recordButton {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-self: center;
+        }
+        #recordButton:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        #recordButton:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #status, #uploadStatus {
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        #status.recording {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+        }
+        #status.error, #uploadStatus.error {
+            background-color: #f39c12;
+            color: white;
+            border-color: #e67e22;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            font-size: 16px;
+            line-height: 1.5;
+            resize: vertical;
+            background-color: white;
+        }
+        .description {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+        input[type="file"] {
+            padding: 8px;
+        }
+        form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #1e8449;
+        }
+        hr {
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Dictado en Tiempo Real</h1>
+        <p class="description">Presiona el botón y comienza a hablar. Tu voz se convertirá en texto automáticamente.</p>
+        
+        <button id="recordButton">Comenzar Dictado</button>
+        <div id="status">Presiona el botón para comenzar</div>
+        
+        <textarea 
+            id="transcript" 
+            placeholder="Tu texto aparecerá aquí..."
+            readonly
+        ></textarea>
+
+        <hr>
+
+        <h2>Transcripción desde archivo .webm</h2>
+        <p class="description">Selecciona un archivo de audio en formato .webm y obtén su transcripción.</p>
+
+        <form id="uploadForm">
+            <input type="file" id="audioFile" accept=".webm" required />
+            <button type="submit">Subir y Transcribir</button>
+        </form>
+        <div id="uploadStatus"></div>
+
+        <textarea 
+            id="uploadTranscript" 
+            placeholder="Transcripción del archivo aparecerá aquí..."
+            readonly
+        ></textarea>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
